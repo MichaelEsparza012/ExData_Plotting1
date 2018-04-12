@@ -1,7 +1,9 @@
+## Once again, the following code loads the data
 rm(list = ls())
 data <- read.table("household_power_consumption.txt", header = T, 
                    sep = ";", na.strings = "?")
-# convert the date variable to Date class
+
+# Code converts the date variable to Date class
 data$Date <- as.Date(data$Date, format = "%d/%m/%Y")
 
 # Subset the data
@@ -10,7 +12,7 @@ data <- subset(data, subset = (Date >= "2007-02-01" & Date <= "2007-02-02"))
 # Convert dates and times
 data$datetime <- strptime(paste(data$Date, data$Time), "%Y-%m-%d %H:%M:%S")
 
-# Plot 2
+# Plot 2 is created with the following code
 data$datetime <- as.POSIXct(data$datetime)
 attach(data)
 plot(Global_active_power ~ datetime, type = "l",
