@@ -1,16 +1,18 @@
+## Load the data
 rm(list = ls())
 data <- read.table("household_power_consumption.txt", header = T, 
                    sep = ";", na.strings = "?")
-# convert the date variable to Date class
+
+# convert the date variable to Date class as before 
 data$Date <- as.Date(data$Date, format = "%d/%m/%Y")
 
-# Subset the data
+# The following code subsets the data
 data <- subset(data, subset = (Date >= "2007-02-01" & Date <= "2007-02-02"))
 
-# Convert dates and times
+# Conversion of dates and times
 data$datetime <- strptime(paste(data$Date, data$Time), "%Y-%m-%d %H:%M:%S")
 
-# Plot 3
+# Plot 3 is created 
 data$datetime <- as.POSIXct(data$datetime)
 
 attach(data)
